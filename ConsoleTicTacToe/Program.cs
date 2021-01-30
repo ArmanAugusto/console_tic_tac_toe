@@ -7,7 +7,8 @@ namespace ConsoleTicTacToe
         static void Main(string[] args)
         {
             TicTacToe game = new TicTacToe();
-            game.PrintGameBoard();
+            game.gameStart();
+            
         }
     }
 }
