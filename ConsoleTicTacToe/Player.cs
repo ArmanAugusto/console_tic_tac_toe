@@ -9,9 +9,11 @@ namespace ConsoleTicTacToe
         private static string name;
         private bool active;
         private static string mark;
+        private string choice;
 
         public string Name { get; set; }
         public bool Active { get; set; }
         public string Mark { get; set; }
+        public string Choice { get; set; }
     }
 }

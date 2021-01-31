@@ -51,8 +51,8 @@ namespace ConsoleTicTacToe
             Console.Write("Enter the second player's name:  ");
             player2.Name = Console.ReadLine();
 
-            Console.WriteLine("Player 1's name is {0}", player1.Name);
-            Console.WriteLine("Player 2's name is {0}", player2.Name);
+            Console.WriteLine("\nPlayer 1's name is {0}.", player1.Name);
+            Console.WriteLine("Player 2's name is {0}.\n", player2.Name);
 
             Console.Write("Is {0} going to be X or is {0} going to be O? Enter X or O:  ", player1.Name);
             string mark = Console.ReadLine();
@@ -63,20 +63,68 @@ namespace ConsoleTicTacToe
                 case "X":
                     player1.Mark = "X";
                     player2.Mark = "O";
-                    Console.WriteLine("{0} is X and {1} is O", player1.Name, player2.Name);
+                    Console.WriteLine("{0} is X and {1} is O.\n", player1.Name, player2.Name);
                     break;
                 case "O":
                     player1.Mark = "O";
                     player2.Mark = "X";
-                    Console.WriteLine("{0} is O and {1} is X", player1.Name, player2.Name);
+                    Console.WriteLine("{0} is O and {1} is X.\n", player1.Name, player2.Name);
                     break;
                 default:
                     Console.WriteLine("Error:  Invalid entry. I will choose for you.");
-                    Console.WriteLine("{0} is X and {1} is O", player1.Name, player2.Name);
+                    Console.WriteLine("{0} is X and {1} is O.\n", player1.Name, player2.Name);
                     player1.Mark = "X";
                     player2.Mark = "O";
                     break;
             }
+
+            Console.WriteLine("{0} will go first.", player1.Name);
+            player1.Active = true;
+
+            if (player1.Active)
+            {
+                PrintGameBoard();
+                Console.WriteLine("\nChoose where you want to place your {0}, {1}:", player1.Mark, player1.Name);
+                player1.Choice = Console.ReadLine();
+                Console.WriteLine("{0} chose {1}.", player1.Name, player1.Choice);
+                
+                switch (player1.Choice)
+                {
+                    case "00":
+                        gameBoard[0, 0] = " " + player1.Mark;
+                        break;
+                    case "01":
+                        gameBoard[0, 1] = " " + player1.Mark;
+                        break;
+                    case "02":
+                        gameBoard[0, 2] = " " + player1.Mark;
+                        break;
+                    case "10":
+                        gameBoard[1, 0] = " " + player1.Mark;
+                        break;
+                    case "11":
+                        gameBoard[1, 1] = " " + player1.Mark;
+                        break;
+                    case "12":
+                        gameBoard[1, 2] = " " + player1.Mark;
+                        break;
+                    case "20":
+                        gameBoard[2, 0] = " " + player1.Mark;
+                        break;
+                    case "21":
+                        gameBoard[2, 1] = " " + player1.Mark;
+                        break;
+                    case "22":
+                        gameBoard[0, 1] = " " + player1.Mark;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid entry. Try again.");
+                        break;
+                }
+
+                PrintGameBoard();
+            }
+            
         }
         
     }
