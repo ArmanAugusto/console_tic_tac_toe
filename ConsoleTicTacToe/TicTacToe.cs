@@ -19,31 +19,31 @@ namespace ConsoleTicTacToe
 
         public TicTacToe()
         {
-            gameBoard[0, 0] = "00";
-            gameBoard[0, 1] = "01";
-            gameBoard[0, 2] = "02";
-            gameBoard[1, 0] = "10";
-            gameBoard[1, 1] = "11";
-            gameBoard[1, 2] = "12";
-            gameBoard[2, 0] = "20";
-            gameBoard[2, 1] = "21";
-            gameBoard[2, 2] = "22";
+            gameBoard[0, 0] = "1";
+            gameBoard[0, 1] = "2";
+            gameBoard[0, 2] = "3";
+            gameBoard[1, 0] = "4";
+            gameBoard[1, 1] = "5";
+            gameBoard[1, 2] = "6";
+            gameBoard[2, 0] = "7";
+            gameBoard[2, 1] = "8";
+            gameBoard[2, 2] = "9";
         }
 
         public void PrintGameBoard()
         {
             Console.WriteLine("\n");
-            Console.WriteLine("          |      |      ");
+            Console.WriteLine("         |     |     ");
             Console.WriteLine("      {0}  |  {1}  |  {2} ", gameBoard[0, 0], gameBoard[0, 1], gameBoard[0, 2]);
-            Console.WriteLine("    ------|------|------");
+            Console.WriteLine("    -----|-----|-----");
             Console.WriteLine("      {0}  |  {1}  |  {2} ", gameBoard[1, 0], gameBoard[1, 1], gameBoard[1, 2]);
-            Console.WriteLine("    ------|------|------");
+            Console.WriteLine("    -----|-----|-----");
             Console.WriteLine("      {0}  |  {1}  |  {2} ", gameBoard[2, 0], gameBoard[2, 1], gameBoard[2, 2]);
-            Console.WriteLine("          |      |      ");
+            Console.WriteLine("         |     |     ");
             Console.WriteLine("\n");
         }
 
-        public void gameStart()
+        public void gameActive()
         {
             Console.WriteLine("\nTic Tac Toe\n");
             Console.Write("Enter the first player's name:  ");
@@ -90,32 +90,32 @@ namespace ConsoleTicTacToe
                 
                 switch (player1.Choice)
                 {
-                    case "00":
-                        gameBoard[0, 0] = " " + player1.Mark;
+                    case "1":
+                        gameBoard[0, 0] = player1.Mark;
                         break;
-                    case "01":
-                        gameBoard[0, 1] = " " + player1.Mark;
+                    case "2":
+                        gameBoard[0, 1] = player1.Mark;
                         break;
-                    case "02":
-                        gameBoard[0, 2] = " " + player1.Mark;
+                    case "3":
+                        gameBoard[0, 2] = player1.Mark;
                         break;
-                    case "10":
-                        gameBoard[1, 0] = " " + player1.Mark;
+                    case "4":
+                        gameBoard[1, 0] = player1.Mark;
                         break;
-                    case "11":
-                        gameBoard[1, 1] = " " + player1.Mark;
+                    case "5":
+                        gameBoard[1, 1] = player1.Mark;
                         break;
-                    case "12":
-                        gameBoard[1, 2] = " " + player1.Mark;
+                    case "6":
+                        gameBoard[1, 2] = player1.Mark;
                         break;
-                    case "20":
-                        gameBoard[2, 0] = " " + player1.Mark;
+                    case "7":
+                        gameBoard[2, 0] = player1.Mark;
                         break;
-                    case "21":
-                        gameBoard[2, 1] = " " + player1.Mark;
+                    case "8":
+                        gameBoard[2, 1] = player1.Mark;
                         break;
-                    case "22":
-                        gameBoard[0, 1] = " " + player1.Mark;
+                    case "9":
+                        gameBoard[2, 2] = player1.Mark;
                         break;
                     default:
                         Console.WriteLine("Invalid entry. Try again.");
@@ -123,8 +123,21 @@ namespace ConsoleTicTacToe
                 }
 
                 PrintGameBoard();
+                Console.WriteLine(CheckForWinner(gameBoard));
             }
             
+        }
+
+        public bool CheckForWinner(string[,] gameBoard)
+        {
+            if (gameBoard[0, 0] == player1.Mark && gameBoard[0, 1] == player1.Mark && gameBoard[0, 2] == player1.Mark)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         
     }

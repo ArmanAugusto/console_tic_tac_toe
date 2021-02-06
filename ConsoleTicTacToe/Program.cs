@@ -7,7 +7,7 @@ namespace ConsoleTicTacToe
         static void Main(string[] args)
         {
             TicTacToe game = new TicTacToe();
-            game.gameStart();
+            game.gameActive();
             
         }
     }
