@@ -58,21 +58,21 @@ namespace ConsoleTicTacToe
             string mark = Console.ReadLine();
             mark.ToUpper();
 
-            switch (mark)
+            switch (mark.ToUpper())
             {
                 case "X":
                     player1.Mark = "X";
                     player2.Mark = "O";
-                    Console.WriteLine("{0} is X and {1} is O.\n", player1.Name, player2.Name);
+                    Console.WriteLine("\n{0} is X and {1} is O.\n", player1.Name, player2.Name);
                     break;
                 case "O":
                     player1.Mark = "O";
                     player2.Mark = "X";
-                    Console.WriteLine("{0} is O and {1} is X.\n", player1.Name, player2.Name);
+                    Console.WriteLine("\n{0} is O and {1} is X.\n", player1.Name, player2.Name);
                     break;
                 default:
                     Console.WriteLine("Error:  Invalid entry. I will choose for you.");
-                    Console.WriteLine("{0} is X and {1} is O.\n", player1.Name, player2.Name);
+                    Console.WriteLine("\n{0} is X and {1} is O.\n", player1.Name, player2.Name);
                     player1.Mark = "X";
                     player2.Mark = "O";
                     break;
@@ -81,51 +81,64 @@ namespace ConsoleTicTacToe
             Console.WriteLine("{0} will go first.", player1.Name);
             player1.Active = true;
 
-            if (player1.Active)
+            if (player1.Active == true)
             {
-                PrintGameBoard();
-                Console.WriteLine("\nChoose where you want to place your {0}, {1}:", player1.Mark, player1.Name);
-                player1.Choice = Console.ReadLine();
-                Console.WriteLine("{0} chose {1}.", player1.Name, player1.Choice);
-                
-                switch (player1.Choice)
-                {
-                    case "1":
-                        gameBoard[0, 0] = player1.Mark;
-                        break;
-                    case "2":
-                        gameBoard[0, 1] = player1.Mark;
-                        break;
-                    case "3":
-                        gameBoard[0, 2] = player1.Mark;
-                        break;
-                    case "4":
-                        gameBoard[1, 0] = player1.Mark;
-                        break;
-                    case "5":
-                        gameBoard[1, 1] = player1.Mark;
-                        break;
-                    case "6":
-                        gameBoard[1, 2] = player1.Mark;
-                        break;
-                    case "7":
-                        gameBoard[2, 0] = player1.Mark;
-                        break;
-                    case "8":
-                        gameBoard[2, 1] = player1.Mark;
-                        break;
-                    case "9":
-                        gameBoard[2, 2] = player1.Mark;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid entry. Try again.");
-                        break;
-                }
-
-                PrintGameBoard();
-                Console.WriteLine(CheckForWinner(gameBoard));
+                PlayerMove(gameBoard, player1);
             }
-            
+            else
+            {
+                PlayerMove(gameBoard, player2);
+            }
+            Console.WriteLine(CheckForWinner(gameBoard));
+
+        }
+
+        public string[,] PlayerMove(string[,] gameBoard, Player player)
+        {
+            PrintGameBoard();
+
+            Console.WriteLine("\nChoose where you want to place your {0}, {1}:", player.Mark, player.Name);
+
+            player1.Choice = Console.ReadLine();
+            Console.WriteLine("{0} chose {1}.", player.Name, player.Choice);
+
+            switch (player.Choice)
+            {
+                case "1":
+                    gameBoard[0, 0] = player.Mark;
+                    break;
+                case "2":
+                    gameBoard[0, 1] = player.Mark;
+                    break;
+                case "3":
+                    gameBoard[0, 2] = player.Mark;
+                    break;
+                case "4":
+                    gameBoard[1, 0] = player.Mark;
+                    break;
+                case "5":
+                    gameBoard[1, 1] = player.Mark;
+                    break;
+                case "6":
+                    gameBoard[1, 2] = player.Mark;
+                    break;
+                case "7":
+                    gameBoard[2, 0] = player.Mark;
+                    break;
+                case "8":
+                    gameBoard[2, 1] = player.Mark;
+                    break;
+                case "9":
+                    gameBoard[2, 2] = player.Mark;
+                    break;
+                default:
+                    Console.WriteLine("Invalid entry. Try again.");
+                    break;
+            }
+
+            PrintGameBoard();
+
+            return gameBoard;
         }
 
         public bool CheckForWinner(string[,] gameBoard)
