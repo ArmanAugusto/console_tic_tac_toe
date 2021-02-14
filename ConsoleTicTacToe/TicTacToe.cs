@@ -10,7 +10,7 @@ namespace ConsoleTicTacToe
         private Player player1 = new Player();
         private Player player2 = new Player();
         private string[,] gameBoard = new string[3, 3];
-        private bool validChoice;
+        private int markCount;
 
         public string this[int i, int j]
         {
@@ -18,7 +18,7 @@ namespace ConsoleTicTacToe
             set { gameBoard[i, j] = value; }
         }
 
-        public bool ValidChoice { get; set; }
+        public int MarkCount { get; set; }
 
         public TicTacToe()
         {
@@ -31,6 +31,7 @@ namespace ConsoleTicTacToe
             gameBoard[2, 0] = "7";
             gameBoard[2, 1] = "8";
             gameBoard[2, 2] = "9";
+            MarkCount = 0;
         }
 
         public void PrintGameBoard()
@@ -83,19 +84,22 @@ namespace ConsoleTicTacToe
             Console.WriteLine("{0} will go first.", player1.Name);
             player1.Active = true;
 
-            if (player1.Active == true)
-            {
-                PlayerMove(gameBoard, player1);
-            }
-            else
-            {
-                PlayerMove(gameBoard, player2);
-            }
-            Console.WriteLine(CheckForWinner(gameBoard));
 
+
+            while (CheckForWinner(gameBoard, player1, MarkCount) != true && CheckForWinner(gameBoard, player2, MarkCount) != true)
+            {
+                if (player1.Active == true)
+                {
+                    PlayerMove(gameBoard, player1, player2);
+                }
+                else
+                {
+                    PlayerMove(gameBoard, player2, player1);
+                }
+            }
         }
 
-        public string[,] PlayerMove(string[,] gameBoard, Player player)
+        public string[,] PlayerMove(string[,] gameBoard, Player playerA, Player playerB)
         {
             bool isValid;
 
@@ -103,42 +107,149 @@ namespace ConsoleTicTacToe
 
             do
             {
-                Console.Write("Choose the location where you want to place your {0}, {1}:  ", player.Mark, player.Name);
+                Console.Write("Choose the location where you want to place your {0}, {1}:  ", playerA.Mark, playerA.Name);
 
-                player1.Choice = Console.ReadLine();
-                Console.WriteLine("\n{0} chose location {1}.", player.Name, player.Choice);
-
+                playerA.Choice = Console.ReadLine();
+                Console.WriteLine("\n{0} chose location {1}.", playerA.Name, playerA.Choice);
             
                 isValid = true;
-                switch (player.Choice)
+                switch (playerA.Choice)
                 {
                     case "1":
-                        gameBoard[0, 0] = player.Mark;
-                        break;
+                        if (gameBoard[0, 0] == "X" || gameBoard[0, 0] == "O")
+                        {
+                            Console.WriteLine("Location 1 is not available. Please choose another location.");
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            gameBoard[0, 0] = playerA.Mark;
+                            playerA.Active = false;
+                            playerB.Active = true;
+                            MarkCount++;
+                            break;
+                        }
                     case "2":
-                        gameBoard[0, 1] = player.Mark;
-                        break;
+                        if (gameBoard[0, 1] == "X" || gameBoard[0, 1] == "O")
+                        {
+                            Console.WriteLine("Location 2 is not available. Please choose another location.");
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            gameBoard[0, 1] = playerA.Mark;
+                            playerA.Active = false;
+                            playerB.Active = true;
+                            MarkCount++;
+                            break;
+                        }
                     case "3":
-                        gameBoard[0, 2] = player.Mark;
-                        break;
+                        if (gameBoard[0, 2] == "X" || gameBoard[0, 2] == "O")
+                        {
+                            Console.WriteLine("Location 3 is not available. Please choose another location.");
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            gameBoard[0, 2] = playerA.Mark;
+                            playerA.Active = false;
+                            playerB.Active = true;
+                            MarkCount++;
+                            break;
+                        }
                     case "4":
-                        gameBoard[1, 0] = player.Mark;
-                        break;
+                        if (gameBoard[1, 0] == "X" || gameBoard[1, 0] == "O")
+                        {
+                            Console.WriteLine("Location 4 is not available. Please choose another location.");
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            gameBoard[1, 0] = playerA.Mark;
+                            playerA.Active = false;
+                            playerB.Active = true;
+                            MarkCount++;
+                            break;
+                        }
                     case "5":
-                        gameBoard[1, 1] = player.Mark;
-                        break;
+                        if (gameBoard[1, 1] == "X" || gameBoard[1, 1] == "O")
+                        {
+                            Console.WriteLine("Location 5 is not available. Please choose another location.");
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            gameBoard[1, 1] = playerA.Mark;
+                            playerA.Active = false;
+                            playerB.Active = true;
+                            MarkCount++;
+                            break;
+                        }
                     case "6":
-                        gameBoard[1, 2] = player.Mark;
-                        break;
+                        if (gameBoard[1, 2] == "X" || gameBoard[1, 2] == "O")
+                        {
+                            Console.WriteLine("Location 6 is not available. Please choose another location.");
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            gameBoard[1, 2] = playerA.Mark;
+                            playerA.Active = false;
+                            playerB.Active = true;
+                            MarkCount++;
+                            break;
+                        }
                     case "7":
-                        gameBoard[2, 0] = player.Mark;
-                        break;
+                        if (gameBoard[2, 0] == "X" || gameBoard[2, 0] == "O")
+                        {
+                            Console.WriteLine("Location 7 is not available. Please choose another location.");
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            gameBoard[2, 0] = playerA.Mark;
+                            playerA.Active = false;
+                            playerB.Active = true;
+                            MarkCount++;
+                            break;
+                        }
                     case "8":
-                        gameBoard[2, 1] = player.Mark;
-                        break;
+                        if (gameBoard[2, 1] == "X" || gameBoard[2, 1] == "O")
+                        {
+                            Console.WriteLine("Location 8 is not available. Please choose another location.");
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            gameBoard[2, 1] = playerA.Mark;
+                            playerA.Active = false;
+                            playerB.Active = true;
+                            MarkCount++;
+                            break;
+                        }
                     case "9":
-                        gameBoard[2, 2] = player.Mark;
-                        break;
+                        if (gameBoard[2, 2] == "X" || gameBoard[2, 2] == "O")
+                        {
+                            Console.WriteLine("Location 9 is not available. Please choose another location.");
+                            isValid = false;
+                            break;
+                        }
+                        else
+                        {
+                            gameBoard[2, 2] = playerA.Mark;
+                            playerA.Active = false;
+                            playerB.Active = true;
+                            MarkCount++;
+                            break;
+                        }
                     default:
                         Console.WriteLine("\nInvalid entry. Try again.\n");
                         isValid = false;
@@ -152,12 +263,54 @@ namespace ConsoleTicTacToe
             return gameBoard;
         }
 
-        public bool CheckForWinner(string[,] gameBoard)
+        public bool CheckForWinner(string[,] gameBoard, Player player, int moveCount)
         {
-            if (gameBoard[0, 0] == player1.Mark && gameBoard[0, 1] == player1.Mark && gameBoard[0, 2] == player1.Mark)
+            if (gameBoard[0, 0] == player.Mark && gameBoard[0, 1] == player.Mark && gameBoard[0, 2] == player.Mark && moveCount != 9)
             {
+                Console.WriteLine("{0} wins!", player.Name);
                 return true;
             }
+            else if (gameBoard[1, 0] == player.Mark && gameBoard[1, 1] == player.Mark && gameBoard[1, 2] == player.Mark && moveCount != 9)
+            {
+                Console.WriteLine("{0} wins!", player.Name);
+                return true;
+            }
+            else if (gameBoard[2, 0] == player.Mark && gameBoard[2, 1] == player.Mark && gameBoard[2, 2] == player.Mark && moveCount != 9)
+            {
+                Console.WriteLine("{0} wins!", player.Name);
+                return true;
+            }
+            else if (gameBoard[0, 0] == player.Mark && gameBoard[1, 0] == player.Mark && gameBoard[2, 0] == player.Mark && moveCount != 9)
+            {
+                Console.WriteLine("{0} wins!", player.Name);
+                return true;
+            }
+            else if (gameBoard[1, 0] == player.Mark && gameBoard[1, 1] == player.Mark && gameBoard[1, 2] == player.Mark && moveCount != 9)
+            {
+                Console.WriteLine("{0} wins!", player.Name);
+                return true;
+            }
+            else if (gameBoard[2, 0] == player.Mark && gameBoard[2, 1] == player.Mark && gameBoard[2, 2] == player.Mark && moveCount != 9)
+            {
+                Console.WriteLine("{0} wins!", player.Name);
+                return true;
+            }
+            else if (gameBoard[0, 0] == player.Mark && gameBoard[1, 1] == player.Mark && gameBoard[2, 2] == player.Mark && moveCount != 9)
+            {
+                Console.WriteLine("{0} wins!", player.Name);
+                return true;
+            }
+            else if (gameBoard[0, 2] == player.Mark && gameBoard[1, 1] == player.Mark && gameBoard[2, 0] == player.Mark && moveCount != 9)
+            {
+                Console.WriteLine("{0} wins!", player.Name);
+                return true;
+            }
+            else if (moveCount == 9)
+            {
+                Console.WriteLine("This game ends in a tie.");
+                return true;
+            }
+
             else
             {
                 return false;
