@@ -7,15 +7,18 @@ namespace ConsoleTicTacToe
 
     class TicTacToe
     {
-        Player player1 = new Player();
-        Player player2 = new Player();
+        private Player player1 = new Player();
+        private Player player2 = new Player();
         private string[,] gameBoard = new string[3, 3];
+        private bool validChoice;
 
         public string this[int i, int j]
         {
             get { return gameBoard[i, j]; }
             set { gameBoard[i, j] = value; }
         }
+
+        public bool ValidChoice { get; set; }
 
         public TicTacToe()
         {
@@ -42,7 +45,7 @@ namespace ConsoleTicTacToe
             Console.WriteLine("         |     |     ");
             Console.WriteLine("\n");
         }
-
+        
         public void gameActive()
         {
             Console.WriteLine("\nTic Tac Toe\n");
@@ -55,10 +58,9 @@ namespace ConsoleTicTacToe
             Console.WriteLine("Player 2's name is {0}.\n", player2.Name);
 
             Console.Write("Is {0} going to be X or is {0} going to be O? Enter X or O:  ", player1.Name);
-            string mark = Console.ReadLine();
-            mark.ToUpper();
+            string playerMark = Console.ReadLine();
 
-            switch (mark.ToUpper())
+            switch (playerMark.ToUpper())
             {
                 case "X":
                     player1.Mark = "X";
@@ -95,46 +97,55 @@ namespace ConsoleTicTacToe
 
         public string[,] PlayerMove(string[,] gameBoard, Player player)
         {
+            bool isValid;
+
             PrintGameBoard();
 
-            Console.WriteLine("\nChoose where you want to place your {0}, {1}:", player.Mark, player.Name);
-
-            player1.Choice = Console.ReadLine();
-            Console.WriteLine("{0} chose {1}.", player.Name, player.Choice);
-
-            switch (player.Choice)
+            do
             {
-                case "1":
-                    gameBoard[0, 0] = player.Mark;
-                    break;
-                case "2":
-                    gameBoard[0, 1] = player.Mark;
-                    break;
-                case "3":
-                    gameBoard[0, 2] = player.Mark;
-                    break;
-                case "4":
-                    gameBoard[1, 0] = player.Mark;
-                    break;
-                case "5":
-                    gameBoard[1, 1] = player.Mark;
-                    break;
-                case "6":
-                    gameBoard[1, 2] = player.Mark;
-                    break;
-                case "7":
-                    gameBoard[2, 0] = player.Mark;
-                    break;
-                case "8":
-                    gameBoard[2, 1] = player.Mark;
-                    break;
-                case "9":
-                    gameBoard[2, 2] = player.Mark;
-                    break;
-                default:
-                    Console.WriteLine("Invalid entry. Try again.");
-                    break;
+                Console.Write("Choose the location where you want to place your {0}, {1}:  ", player.Mark, player.Name);
+
+                player1.Choice = Console.ReadLine();
+                Console.WriteLine("\n{0} chose location {1}.", player.Name, player.Choice);
+
+            
+                isValid = true;
+                switch (player.Choice)
+                {
+                    case "1":
+                        gameBoard[0, 0] = player.Mark;
+                        break;
+                    case "2":
+                        gameBoard[0, 1] = player.Mark;
+                        break;
+                    case "3":
+                        gameBoard[0, 2] = player.Mark;
+                        break;
+                    case "4":
+                        gameBoard[1, 0] = player.Mark;
+                        break;
+                    case "5":
+                        gameBoard[1, 1] = player.Mark;
+                        break;
+                    case "6":
+                        gameBoard[1, 2] = player.Mark;
+                        break;
+                    case "7":
+                        gameBoard[2, 0] = player.Mark;
+                        break;
+                    case "8":
+                        gameBoard[2, 1] = player.Mark;
+                        break;
+                    case "9":
+                        gameBoard[2, 2] = player.Mark;
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid entry. Try again.\n");
+                        isValid = false;
+                        break;
+                }
             }
+            while (isValid != true);
 
             PrintGameBoard();
 
